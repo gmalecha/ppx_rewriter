@@ -1,5 +1,5 @@
 open Olist
-open OUnit2
+open OUnit
 
 let test_map_fusion _ =
   reset () ;
