@@ -1,0 +1,3 @@
+version = "%{version}%"
+description = "A -ppx extension to do source code rewriting"
+ppx = "./ppx_rewrite"

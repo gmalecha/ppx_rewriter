@@ -1,0 +1,21 @@
+opam-version: "1.2"
+maintainer: "gregory malecha <gmalecha@gmail.com>"
+authors: [ "gregory malecha <gmalecha@gmail.com>" ]
+license: "MIT"
+homepage: "https://github.com/gmalecha/ppx_rewriter"
+bug-reports: "https://github.com/gmalecha/ppx_rewriter/issues"
+dev-repo: "https://github.com/gmalecha/ppx_rewriter"
+tags: [ "optimization" ]
+substs: [ "pkg/META" ]
+build: [
+  "ocaml" "pkg/build.ml" "native=%{ocaml-native}%"
+                         "native-dynlink=%{ocaml-native-dynlink}%"
+]
+build-test: [
+  "ocamlbuild" "-classic-display" "-use-ocamlfind" "src_test/test_ppx_rewrite.byte" "--"
+]
+depends: [
+  "ppx_tools"    {>= "0.99.1"}
+  "ounit"        {test}
+]
+available: [ocaml-version >= "4.02.0"]
