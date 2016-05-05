@@ -20,15 +20,14 @@ let optimize_mapper argv =
     Ast_mapper.signature_item =
     begin fun mapper si ->
       match si with
-      (* Is this an extension node? *)
       | { psig_desc =
-          (* Should have name "getenv". *)
-          Psig_extension (({ txt = "rewrite" ; loc }, pay), _) } ->
-        begin match pay with
-              | PStr _ -> raise (Location.Error (Location.error ~loc "str"))
-              | PTyp _ -> raise (Location.Error (Location.error ~loc "type"))
-              | PPat (_,_) -> raise (Location.Error (Location.error ~loc "pat"))
-              | PSig _ -> raise (Location.Error (Location.error ~loc "sig"))
+          Psig_attribute ({ txt = "optimize" ; loc }, pay) } ->
+        begin (*default_mapper.signature_item mapper si *)
+          match pay with
+          | PStr _ -> raise (Location.Error (Location.error ~loc "str"))
+          | PTyp _ -> raise (Location.Error (Location.error ~loc "type"))
+          | PPat (_,_) -> raise (Location.Error (Location.error ~loc "pat"))
+          | PSig _ -> raise (Location.Error (Location.error ~loc "sig"))
         end
       (* Delegate to the default mapper. *)
       | x -> default_mapper.signature_item mapper x
